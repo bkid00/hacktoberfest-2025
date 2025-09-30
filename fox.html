@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Fox & Meteor Shower</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+      overflow: hidden;
+    }
+
+    /* Stars */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    /* Meteors */
+    .meteor {
+      position: absolute;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #fff);
+      transform-origin: left center;
+      animation: shoot 3s linear infinite;
+    }
+
+    @keyframes shoot {
+      0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateX(100vw) translateY(100vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* Running Fox Mascot */
+    .fox {
+      position: absolute;
+      bottom: 20%;
+      left: -100px;
+      animation: run 4s linear infinite;
+    }
+
+    .fox-body {
+      width: 80px;
+      height: 40px;
+      background: #ff6b35;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .fox-head {
+      width: 30px;
+      height: 30px;
+      background: #ff6b35;
+      border-radius: 50%;
+      position: absolute;
+      left: -10px;
+      top: -10px;
+    }
+
+    .fox-ear {
+      width: 15px;
+      height: 25px;
+      background: #ff6b35;
+      position: absolute;
+      top: -15px;
+      border-radius: 5px;
+    }
+    .fox-ear.left { left: -5px; transform: rotate(-30deg); }
+    .fox-ear.right { right: -5px; transform: rotate(30deg); }
+
+    .fox-tail {
+      width: 40px;
+      height: 15px;
+      background: #ff6b35;
+      position: absolute;
+      right: -20px;
+      top: 10px;
+      border-radius: 0 8px 8px 0;
+      animation: tailWag 0.3s ease-in-out infinite alternate;
+    }
+
+    .fox-leg {
+      width: 15px;
+      height: 30px;
+      background: #ff6b35;
+      position: absolute;
+      bottom: -20px;
+      border-radius: 5px;
+      animation: legMove 0.4s ease-in-out infinite alternate;
+    }
+    .fox-leg.front { left: 10px; }
+    .fox-leg.back { right: 10px; animation-delay: 0.2s; }
+
+    @keyframes run {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    @keyframes tailWag {
+      from { transform: rotate(-10deg); }
+      to { transform: rotate(10deg); }
+    }
+
+    @keyframes legMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    /* Ground effect */
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(to top, #2d2424, #3d2f2f);
+    }
+  </style>
+</head>
+<body>
+  <div class="ground"></div>
+  
+  <!-- Stars -->
+  <script>
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 2}s`;
+      document.body.appendChild(star);
+    }
+  </script>
+
+  <!-- Meteors -->
+  <script>
+    for (let i = 0; i < 5; i++) {
+      const meteor = document.createElement('div');
+      meteor.className = 'meteor';
+      meteor.style.left = `${Math.random() * 50}%`;
+      meteor.style.top = `${Math.random() * 50}%`;
+      meteor.style.animationDelay = `${Math.random() * 5}s`;
+      document.body.appendChild(meteor);
+    }
+  </script>
+
+  <!-- Fox Mascot -->
+  <div class="fox">
+    <div class="fox-body">
+      <div class="fox-head">
+        <div class="fox-ear left"></div>
+        <div class="fox-ear right"></div>
+      </div>
+      <div class="fox-tail"></div>
+      <div class="fox-leg front"></div>
+      <div class="fox-leg back"></div>
+    </div>
+  </div>
+</body>
+</html>
